@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="col-6">
-                            <a href="#" class="btn btn-link">Forgot password?</a>
+                            <a class="btn btn-link" href="{{ route('password.request') }}">Forgot password?</a>
                         </div>
                     </div>
                 </div>

@@ -21,6 +21,20 @@ Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
+Route::prefix('user')->group(function(){
+  Route::get('dashboard', 'UserController@dashboard')->name('userDashboard');
+  Route::get('comments', 'UserController@commonts')->name('userComments');
+});
+
+Route::prefix('auther')->group(function(){
+  Route::get('dashboard', 'AutherController@dashboard')->name('autherDashboard');
+  Route::get('posts', 'AutherController@posts')->name('autherPosts');
+  Route::get('comments', 'AutherController@commonts')->name('autherComments');
+});
+
 Route::prefix('admin')->group(function(){
-  Route::get('/dashboard', 'AdminController@dashboard')->name('adminDashboard');
+  Route::get('dashboard', 'AdminController@dashboard')->name('adminDashboard');;
+  Route::get('posts', 'AdminController@posts')->name('adminPosts');;
+  Route::get('coments', 'AdminController@coments')->name('adminComments');;
+  Route::get('users', 'AdminController@users')->name('adminUsers');;
 });
