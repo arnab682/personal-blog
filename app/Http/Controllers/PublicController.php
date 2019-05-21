@@ -13,8 +13,9 @@ class PublicController extends Controller
           $posts = Post::all();
           return view('welcome', compact('posts'));
     }
-    public function singlePost($id){
-          return view('singlePost');
+    public function singlePost(Post $post){
+        //  $post = Post::find($id);
+          return view('singlePost', compact('post'));
     }
     public function about(){
           return view('about');

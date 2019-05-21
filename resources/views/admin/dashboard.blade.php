@@ -1,1 +1,1 @@
-<h1>Antika</h1>
+@extends('layouts.admin')
