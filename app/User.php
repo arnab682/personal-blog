@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Comment;
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,5 +40,11 @@ class User extends Authenticatable
 
     public function comments(){
       return $this->hasMany('App\Comment');
+    }
+    public function posts(){
+      return $this->hasMany('App\Post');
+    }
+    public function postsToday(){
+      return $this->hasMany('App\Post')->where('create_at', '>=', Carbon::today());
     }
 }
