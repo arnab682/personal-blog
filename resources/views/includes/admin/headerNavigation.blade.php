@@ -12,6 +12,9 @@
     </a>
 
     <ul class="navbar-nav ml-auto">
+      @if(Auth::user()->auther==true)
+        <a href="{{route('newPost')}}" class="btn btn-primary">New Post</a> |
+      @endif
                   <!--          <li class="nav-item d-md-down-none">
                                 <a href="#">
                                     <i class="fa fa-bell"></i>

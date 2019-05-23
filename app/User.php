@@ -45,6 +45,6 @@ class User extends Authenticatable
       return $this->hasMany('App\Post');
     }
     public function postsToday(){
-      return $this->hasMany('App\Post')->where('create_at', '>=', Carbon::today());
+      return $this->hasMany('App\Post')->where('created_at', '>=', Carbon::today());
     }
 }

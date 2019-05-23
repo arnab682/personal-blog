@@ -32,6 +32,8 @@ Route::prefix('user')->group(function(){
 Route::prefix('auther')->group(function(){
   Route::get('dashboard', 'AutherController@dashboard')->name('autherDashboard');
   Route::get('posts', 'AutherController@posts')->name('autherPosts');
+  Route::get('posts/new', 'AutherController@newPost')->name('newPost');
+  Route::post('posts/new', 'AutherController@createPost')->name('createPost');
   Route::get('comments', 'AutherController@comments')->name('autherComments');
 });
 
