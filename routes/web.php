@@ -34,6 +34,9 @@ Route::prefix('auther')->group(function(){
   Route::get('posts', 'AutherController@posts')->name('autherPosts');
   Route::get('posts/new', 'AutherController@newPost')->name('newPost');
   Route::post('posts/new', 'AutherController@createPost')->name('createPost');
+  Route::get('posts/{id}/edit', 'AutherController@postEdit')->name('postEdit');
+  Route::post('posts/{id}/edit', 'AutherController@postEditPost')->name('postEditPost');
+  Route::post('posts/{id}/delete', 'AutherController@deletePost')->name('deletePost');
   Route::get('comments', 'AutherController@comments')->name('autherComments');
 });
 

@@ -26,7 +26,9 @@ class AutherController extends Controller
       return view('auther.posts');
     }
     public function comments(){
-      return view('auther.comments');
+      $posts = Post::where('user_id', Auth::id())->pluck('id')->toArray();
+      $comments = Comment::whereIn('post_id', $posts)->get();
+      return view('auther.comments', compact('comments'));
     }
     public function newPost(){
       return view('auther.newPost');
@@ -38,6 +40,24 @@ class AutherController extends Controller
       $post->user_id = Auth::id();
       $post->save();
 
-      return back()->with('sucess', 'Post is Sucessfully Create.');
+      return back()->with('success', 'Post is Sucessfully Create.');
+    }
+    public function postEdit($id){
+      $post = Post::where('id', $id)->where('user_id', Auth::id())->first();
+      return view('auther.editPost', compact('post'));
+    }
+    public function postEditPost(CreatePost $request, $id){
+      $post = Post::where('id', $id)->where('user_id', Auth::id())->first();
+      $post->title = $request['title'];
+      $post->content = $request['content'];
+      $post->save();
+
+      return back()->with('success', "Post Update Successfully");
+    }
+    public function deletePost($id){
+      $post = Post::where('id', $id)->where('user_id', Auth::id())->first();
+      $post->delete();
+
+      return back()->with('success', "Post Delete Successfully");
     }
 }

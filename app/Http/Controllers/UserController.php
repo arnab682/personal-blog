@@ -34,8 +34,25 @@ class UserController extends Controller
       $user = Auth::user();
       $user->name = $request['name'];
       $user->email = $request['email'];
-
       $user->save();
+
+      if($request['password'] != ""){
+        if(!(Hash::check($request['password'], Auth::user()->password))){
+          return redirect()->back()->with('error', "Your current password does not match with the password you provided");
+        }
+        if(strcmp($request['password'], $request['new_password']) == 0){
+          return redirect()->back()->with('error', "New Password cannot be same as your New Confirmation Password.");
+        }
+        $validation = $request->validate([
+          'password' => 'required',
+          'new_password' => 'required|string|min:6|confirmed',
+        ]);
+        $user->password = bcrypt($request['new_password']);
+        $user->save();
+
+        return redirect()->back()->with('success', "Password changed successfully");
+      }
+
       return back();
     }
 }
