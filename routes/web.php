@@ -43,6 +43,12 @@ Route::prefix('auther')->group(function(){
 Route::prefix('admin')->group(function(){
   Route::get('dashboard', 'AdminController@dashboard')->name('adminDashboard');
   Route::get('posts', 'AdminController@posts')->name('adminPosts');
-  Route::get('coments', 'AdminController@comments')->name('adminComments');
+  Route::get('posts/{id}/edit', 'AdminController@postEdit')->name('postEdit');
+  Route::post('posts/{id}/edit', 'AdminController@postEditPost')->name('postEditPost');
+  Route::post('posts/{id}/delete', 'AdminController@deletePost')->name('deletePost');
+  Route::get('comments', 'AdminController@comments')->name('adminComments');
+  Route::post('comments/{id}/delete', 'AdminController@deleteComments')->name('adminDeleteComments');
   Route::get('users', 'AdminController@users')->name('adminUsers');
+  Route::post('users/{id}/delete', 'AdminController@deleteUser')->name('deleteUser');
+  Route::post('users/{id}/edit', 'AdminController@editUser')->name('editUser');
 });

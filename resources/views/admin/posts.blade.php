@@ -26,7 +26,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                          @foreach(posts as $post)
+                          @foreach($posts as $post)
                             <tr>
                                 <td>{{$post->id}}</td>
                                 <td class="text-nowrap"><a href="{{route('singlePost', $post->id)}}">{{$post->title}}</a></td>
