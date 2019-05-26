@@ -1,55 +1,68 @@
 @extends('layouts.admin')
 
-@section('title') User @endsection
+@section('title') Edit User @endsection
 
 @section('content')
 
 <div class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bg-light">
-                    All User
-                </div>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header bg-light">
+                      Edit Post :
+                  </div>
+                  @if(Session::has('success'))
+                    <div class="alert alert-success">{{Session::get('success')}}</div>
+                  @endif
 
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Post</th>
-                                <th>Comment</th>
-                                <th>Created at</th>
-                                <th>Updated at</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                          @foreach($users as $user)
-                            <tr>
-                                <td>{{$user->id}}</td>
-                                <td class="text-nowrap">{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->posts->count()}}</td>
-                                <td>{{$user->comments->count()}}</td>
-                                <td>{{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</td>
-                                <td>{{ \Carbon\Carbon::parse($user->updated_at)->diffForHumans() }}</td>
-                                <td>
-                                  <a href="#" class="btn btn-warning"><i class="icon icon-pencil"></i></a>
-                                  <form id="deleteUser-{{$user->id}}" action="#" method="post">@csrf</form>
-                                  <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteUser-{{$user->id}}').submit()">X</button></td>
-                            </tr>
-                          @endforeach
-                            </tbody>
-                        </table>
+                  @if($errors->any())
+                    <div class="alert alert-danger">
+                      <ul>
+                        @foreach($errors->all() as $error)
+                          <li>{{$error}}</li>
+                        @endforeach
+                      </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                  @endif
+                  <form class="" action="{{route('editUserPost', $user->id)}}" method="post">@csrf
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="normal-input" class="form-control-label">Name</label>
+                                    <input name="name" class="form-control" value="{{ $user->name }}" >
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="normal-input" class="form-control-label">Email</label>
+                                    <input name="email" class="form-control" value="{{ $user->email }}" >
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="normal-input" class="form-control-label">Permition :</label>
+                                    <input type="checkbox" class="form-control" name="author" value=1 {{ $user->author == true ? 'checked' : '' }} > Author
+                                    <br>
+                                    <input type="checkbox" class="form-control" name="admin" value=1 {{ $user->admin == true ? 'checked' : '' }} > Admin
+                                </div>
+                            </div>
+
+                          </div>
+
+                      <button class="btn btn-success" type="submit">Update User</button>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+  </div>
 </div>
 
 @endsection

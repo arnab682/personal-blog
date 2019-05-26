@@ -38,8 +38,8 @@
                                 <td>{{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</td>
                                 <td>{{ \Carbon\Carbon::parse($user->updated_at)->diffForHumans() }}</td>
                                 <td>
-                                  <a href="#" class="btn btn-warning"><i class="icon icon-pencil"></i></a>
-                                  <form id="deleteUser-{{$user->id}}" action="#" method="post">@csrf</form>
+                                  <a href="{{route('editUser', $user->id)}}" class="btn btn-warning"><i class="icon icon-pencil"></i></a>
+                                  <form id="deleteUser-{{$user->id}}" action="{{route('adminDeleteUser', $user->id)}}" method="post">@csrf</form>
                                   <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteUser-{{$user->id}}').submit()">X</button></td>
                             </tr>
                           @endforeach

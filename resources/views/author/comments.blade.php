@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-light">
-                    Auther Comments
+                    author Comments
                 </div>
 
                 <div class="card-body">

@@ -29,15 +29,15 @@ Route::prefix('user')->group(function(){
   Route::post('profile', 'UserController@profilePost')->name('userProfilePost');
 });
 
-Route::prefix('auther')->group(function(){
-  Route::get('dashboard', 'AutherController@dashboard')->name('autherDashboard');
-  Route::get('posts', 'AutherController@posts')->name('autherPosts');
-  Route::get('posts/new', 'AutherController@newPost')->name('newPost');
-  Route::post('posts/new', 'AutherController@createPost')->name('createPost');
-  Route::get('posts/{id}/edit', 'AutherController@postEdit')->name('postEdit');
-  Route::post('posts/{id}/edit', 'AutherController@postEditPost')->name('postEditPost');
-  Route::post('posts/{id}/delete', 'AutherController@deletePost')->name('deletePost');
-  Route::get('comments', 'AutherController@comments')->name('autherComments');
+Route::prefix('author')->group(function(){
+  Route::get('dashboard', 'authorController@dashboard')->name('authorDashboard');
+  Route::get('posts', 'authorController@posts')->name('authorPosts');
+  Route::get('posts/new', 'authorController@newPost')->name('newPost');
+  Route::post('posts/new', 'authorController@createPost')->name('createPost');
+  Route::get('posts/{id}/edit', 'authorController@postEdit')->name('postEdit');
+  Route::post('posts/{id}/edit', 'authorController@postEditPost')->name('postEditPost');
+  Route::post('posts/{id}/delete', 'authorController@deletePost')->name('deletePost');
+  Route::get('comments', 'authorController@comments')->name('authorComments');
 });
 
 Route::prefix('admin')->group(function(){
@@ -49,6 +49,8 @@ Route::prefix('admin')->group(function(){
   Route::get('comments', 'AdminController@comments')->name('adminComments');
   Route::post('comments/{id}/delete', 'AdminController@deleteComments')->name('adminDeleteComments');
   Route::get('users', 'AdminController@users')->name('adminUsers');
-  Route::post('users/{id}/delete', 'AdminController@deleteUser')->name('deleteUser');
-  Route::post('users/{id}/edit', 'AdminController@editUser')->name('editUser');
+  Route::get('users/{id}/edit', 'AdminController@editUser')->name('editUser');
+    Route::post('users/{id}/edit', 'AdminController@editUserPost')->name('editUserPost');
+  Route::post('users/{id}/delete', 'AdminController@deleteUser')->name('adminDeleteUser');
+
 });

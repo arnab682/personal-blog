@@ -14,23 +14,23 @@
                     <i class="icon icon-book-open"></i> Comments
                 </a>
             </li>
-          @if(Auth::user()->auther == true)
+          @if(Auth::user()->author == true)
             <li class="nav-title">Author</li>
 
             <li class="nav-item nav-dropdown">
-                <a href="{{route('autherDashboard')}}" class="nav-link {{Route::currentRouteName() == 'autherDashboard' ? 'active' : ''}}">
+                <a href="{{route('authorDashboard')}}" class="nav-link {{Route::currentRouteName() == 'authorDashboard' ? 'active' : ''}}">
                     <i class="icon icon-speedometer"></i> Dashboard
                 </a>
             </li>
 
             <li class="nav-item nav-dropdown">
-                <a href="{{route('autherPosts')}}" class="nav-link {{Route::currentRouteName() == 'autherPosts' ? 'active' : ''}}">
+                <a href="{{route('authorPosts')}}" class="nav-link {{Route::currentRouteName() == 'authorPosts' ? 'active' : ''}}">
                     <i class="icon icon-paper-clip"></i> Posts
                 </a>
             </li>
 
             <li class="nav-item nav-dropdown">
-                <a href="{{route('autherComments')}}" class="nav-link {{Route::currentRouteName() == 'autherComments' ? 'active' : ''}}">
+                <a href="{{route('authorComments')}}" class="nav-link {{Route::currentRouteName() == 'authorComments' ? 'active' : ''}}">
                     <i class="icon icon-book-open"></i> Comments
                 </a>
             </li>

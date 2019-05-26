@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title') Auther Post @endsection
+@section('title') author Post @endsection
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-light">
-                    Auther Posts :
+                    author Posts :
                 </div>
 
                 <div class="card-body">
