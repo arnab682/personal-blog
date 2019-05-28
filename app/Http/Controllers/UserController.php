@@ -22,23 +22,22 @@ class UserController extends Controller
     }
 
     public function dashboard(){
+
       $chart = new DashboardChart;
-
       $days = $this->generateDateRange(Carbon::now()->subDays(30), Carbon::now());
-
       $comments = [];
-
       foreach($days as $day){
-        $comments[] = Comment::whereData('created_at', $day)->where('user_id', Auth::id())->count();
+      $comments[] = Comment::whereData('created_at', $day)->where('user_id', Auth::id())->count();
       }
       $chart->dataset('Comments', 'line', $comments);
       $chart->labels($days);
 
       return view('user.dashboard', compact('chart'));
+      //return view('user.dashboard');
     }
     private function generateDateRange(Carbon $start_date, Carbon $end_date){
-      $dates = [];
 
+      $dates = [];
       for($date = $start_date; $date->lte($end_date); $date->addDay()) {
         $dates[] = $date->format('Y-m-d');
       }
@@ -77,6 +76,15 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', "Password changed successfully");
       }
+
+      return back();
+    }
+    public function newComment(Request $request){
+      $comment = new Comment;
+      $comment->post_id = $request['post'];
+      $comment->user_id = Auth::id();
+      $comment->content = $request['comment'];
+      $comment->save();
 
       return back();
     }

@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::prefix('user')->group(function(){
+  Route::post('new-comments', 'UserController@newComment')->name('newComment');
   Route::get('dashboard', 'UserController@dashboard')->name('userDashboard');
   Route::get('comments', 'UserController@comments')->name('userComments');
     Route::post('comments/{id}/delete', 'UserController@deleteComment')->name('deleteComment');
@@ -53,4 +54,8 @@ Route::prefix('admin')->group(function(){
     Route::post('users/{id}/edit', 'AdminController@editUserPost')->name('editUserPost');
   Route::post('users/{id}/delete', 'AdminController@deleteUser')->name('adminDeleteUser');
 
+});
+
+Route::prefix('shop')->group(function(){
+  Route::get('/', 'ShopController@index')->name('shop.index');
 });

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\user;
 use App\Post;
 use App\Comment;
+use Carbon\Carbon;
+use App\Charts\DashboardChart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\UserUpdate;
@@ -16,9 +19,31 @@ class AdminController extends Controller
       $this->middleware('CheckRole:admin');
       $this->middleware('auth');
     }
+
     public function dashboard(){
+      /*$chart = new DashboardChart;
+      $days = $this->generateDateRange(Carbon::now()->subDays(30), Carbon::now());
+      $comments = [];
+      foreach($days as $day){
+      $comments[] = Comment::whereData('created_at', $day)->where('user_id', Auth::id())->count();
+      }
+      $chart->dataset('Comments', 'line', $comments);
+      $chart->labels($days);*/
+
+      //return view('admin.dashboard', compact('chart'));
       return view('admin.dashboard');
     }
+
+    /*private function generateDateRange(Carbon $start_date, Carbon $end_date){
+
+      $dates = [];
+      for($date = $start_date; $date->lte($end_date); $date->addDay()) {
+        $dates[] = $date->format('Y-m-d');
+      }
+      return $dates;
+    }*/
+
+
     public function posts(){
       $posts = Post::all();
       return view('admin.posts', compact('posts'));
