@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\user;
 use App\Post;
 use App\Comment;
+use App\Product;
 use Carbon\Carbon;
 use App\Charts\DashboardChart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\UserUpdate;
+use App\Http\Requests\NewProductPost;
 
 class AdminController extends Controller
 {
@@ -104,5 +106,46 @@ class AdminController extends Controller
       $user->delete();
 
       return back()->with('success', "Post Delete Successfully");
+    }
+    public function products(){
+      $products = Product::all();
+      return view('admin.products', compact('products'));
+    }
+    public function newProduct(){
+
+      return view('admin.newProduct');
+    }
+    public function newProductPost(NewProductPost $request){
+      /* $this->validate($request,[
+        'title' => 'required|string',
+        'thumbnail' => 'required|file',
+        'description' => 'required',
+        'price' => 'required|regex:/^[0-9]+(\.[0-9][0-9])?$/'
+      ]); */
+
+      $product = new Product;
+      $product->title = $request['title'];
+      $product->description = $request['description'];
+      $product->price = $request['price'];
+
+      $thumbnail = $request->file('thumbnail');
+
+      $fileName = $thumbnail->getClientOriginalName();
+      $fileExtension = $thumbnail->getClientOriginalExtension();
+
+      $thumbnail->move('product-images', $fileName);
+      $product->thumbnail = 'product-images/'.$fileName;
+
+      //dump('$product[]'); die();
+      $product->save();
+
+      //return back();
+      return back()->with('success', "User Update Successfully");
+    }
+    public function editProduct(){
+
+    }
+    public function editProductPost(Request $request){
+
     }
 }
