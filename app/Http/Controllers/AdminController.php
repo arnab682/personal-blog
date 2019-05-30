@@ -142,10 +142,52 @@ class AdminController extends Controller
       //return back();
       return back()->with('success', "User Update Successfully");
     }
-    public function editProduct(){
 
+    public function editProduct($id){
+      $product = Product::findOrFail($id);
+      //$product = Product::find($id);
+      return view('admin.editProduct', compact('product'));
+
+      //$post = Post::where('id', $id)->first();
+      //return view('admin.editPost', compact('post'));
     }
-    public function editProductPost(Request $request){
 
+    public function editProductPost(Request $request, $id){
+
+      
+
+      $this->validate($request, [
+        'title' => 'required|string',
+        'thumbnail' => 'file',
+        'description' => 'required',
+        'price' => 'required|regex:/^[0-9]+(\.[0-9][0-9])?$/'
+      ]);
+
+      $product = Product::findOrFail($id);
+      $product->title = $request['title'];
+      $product->description = $request['description'];
+      $product->price = $request['price'];
+
+      if($request->hasFile('thumbnail')){
+      $thumbnail = $request->file('thumbnail');
+
+      $fileName = $thumbnail->getClientOriginalName();
+      $fileExtension = $thumbnail->getClientOriginalExtension();
+
+      $thumbnail->move('product-images', $fileName);
+      $product->thumbnail = 'product-images/'.$fileName;
+      }
+
+      //dump('$product[]'); die();
+      $product->save();
+
+      //return back();
+      return back();
+    }
+
+    public function deleteProduct($id){
+      $product = Product::findOrFail($id)->delete();
+
+      return back();
     }
 }

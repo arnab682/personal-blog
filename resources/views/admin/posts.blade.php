@@ -34,7 +34,7 @@
                                 <td>{{ \Carbon\Carbon::parse($post->updated_at)->diffForHumans() }}</td>
                                 <td>{{$post->content}}</td>
                                 <td>
-                                  <a class="btn-warning" href="{{route('postEdit', $post->id)}}">Edit</a> |
+                                  <a class="btn btn-warning" href="{{route('postEdit', $post->id)}}"><i class="icon icon-pencil"></i></a> |
 
                                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePostModal-{{$post->id}}">X</button>
                                 </td>

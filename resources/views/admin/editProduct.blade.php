@@ -34,7 +34,7 @@
                                       <input name="thumbnail" type="file" class="form-control" >
                                   </div>
                               </div>
-                              <img src="{{asset($product->thumbnail)}}" width="100" alt="">
+                              <img src="{{asset($product->thumbnail)}}" width="100" height="100" alt="">
                           </div>
 
                           <div class="row">
@@ -64,7 +64,7 @@
                               </div>
                           </div>
 
-                      <button class="btn btn-success" type="submit">Create Product Post</button>
+                      <button class="btn btn-success" type="submit">Update Product Post</button>
                       </div>
                     </form>
                 </div>
